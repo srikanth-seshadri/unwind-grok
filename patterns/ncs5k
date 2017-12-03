@@ -1,0 +1,4 @@
+PORT_TYPE ((CAUI4)|(SGMII))?
+SERDES_NUM \d\d(-\d\d)?
+SIGNAL_LOCK [+-]
+SERDES_RATE (%{NUMBER}|(N/A))?

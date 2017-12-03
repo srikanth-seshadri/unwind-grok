@@ -1,0 +1,51 @@
+PIM_MODE [a-zA-Z-]+
+SPACE \s*
+SHUTDOWN shutdown
+ALPHA [A-Za-z]+
+ALPHA_SPACE [A-Za-z]+
+ALPHANUMERIC [A-Za-z0-9]+
+BDI_OP_STATE up|.*down
+DEFAULT Default
+HWCOUNT (\s*[0-9\/])+
+FLAG \) Flags:
+COMA \(\*,
+BALPHA [A-Z]+
+INTERFACE (Te|Gi+[A-Za-z0-9\/]+)
+NEWLINE [\n]
+TIME1 %{MINUTE}:%{SECOND}
+MINUS_SIGN [-]
+UPTIME (%{TIME}|%{NUMBER}(s|m|h|d|w|m|y)%{NUMBER}(s|m|h|d|w|m|y))
+MCAST_SOURCE (%{IP}|\*)
+MCAST_RP ( RP %{IP}|.*)
+EXPIRY (%{TIME}|%{TIME1}|stopped)
+IPCIDR (?:%{IP}[/]%{NUMBER}) 
+IP_ALL (?:%{IPCIDR}|%{IP}|unassigned)
+MRIB_ENTRY_FLAG ([]|%{SPACE}%{ALPHA})
+RSIPS_STR \d+\/\d+\/\d+
+PORT_NAME_STR (HundredGigE|TenGigE|Ethernet|TenGigabitEthernet|GigabitEthernet|Gi|Te)
+PORT_STR %{PORT_NAME_STR}%{RSIPS_STR}
+INTERFACE_NUMBER %{NUMBER}\/%{NUMBER}\/%{NUMBER}
+INTERFACE_CUSTOM (%{PORT_NAME_STR}%{INTERFACE_NUMBER}|%{LOOP_FINAL})
+LOOP_NAME_STR (Loopback|LOOPBACK|BDI|bdi|Tunnel|TUNNEL|bd|BD)
+LOOP_STR %{NUMBER}
+LOOP_FINAL %{LOOP_NAME_STR}%{LOOP_STR}
+PORT_INT_NAME (%{PORT_STR}|%{LOOP_FINAL}|null|Null|NULL)
+PKT_STAT_QUARTET (?:%{NUMBER}[/]%{NUMBER}[/]%{NUMBER}[/]%{NUMBER})
+FORWARD_SLASH [/]
+HEX_FORMAT (0x%{NUMBER})
+PORT_SPEED_MPBS (NA|%{NUMBER} Mbps)
+HEX_8Bit [A-Fa-f0-9]{8}
+HEX_EG1 (0x%{HEX_8Bit})
+HEX_6Bit [A-Fa-f0-9]{6}
+HEX_4Bit [A-Fa-f0-9]{4}
+HEX_Uni  [A-Fa-f0-9]{1-8}
+HEX_EG5 (0x%{HEX_Uni})
+HEX_EG2 (0x%{HEX_6Bit})
+HEX_EG3 (%{HEX_EG1}|%{HEX_EG2})
+INTERFACE_MODE (Forward|Sparse|Dense)
+HEX_DUMP1 [a-fA-F0-9]
+HEX_4_VAL (0x%{HEX_DUMP1}%{HEX_DUMP1}%{HEX_DUMP1}%{HEX_DUMP1})
+STATUS_1 (up|administratively down|down) 
+SLOT (%{NUMBER}\/%{NUMBER})
+IM_TYPE ((%{ALPHA}%{NUMBER}-%{WORD}-%{WORD}-%{WORD}|%{ALPHA}%{NUMBER}-%{WORD}-%{WORD}|%{ALPHA}%{NUMBER}-%{WORD})|Unknown)
+IM_STATUS (%{WORD}\/%{ALPHA})

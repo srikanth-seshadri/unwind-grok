@@ -1,0 +1,5 @@
+All patterns are under patterns directory. They can't be under grok directly as
+pygok complains about .git directory being present there. The current
+organization is OS PI (ios_xr, ios_xe files), and a bunch of platform files
+(eg. ncs1k). I believe this has to be flat and it is likely not worth creating
+a directory hierarchy here even if it were allowed.

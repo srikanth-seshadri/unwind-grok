@@ -1,0 +1,9 @@
+ALPHA [A-Za-z]+
+ALPHA_SPACE [A-Za-z]+
+ALPHANUMERIC [A-Za-z0-9]+
+WORD_NS \w+
+INT_LIST1 ( \d+)+
+INT_LIST2 (\d+ )+
+WORD_LIST_NL1 ( %{ALPHA})+%{NL}( %{ALPHA})+
+SENTENCE (%{ALPHA_SPACE})+%{NL}(%{ALPHA_SPACE})+
+NL [\s\S]*?

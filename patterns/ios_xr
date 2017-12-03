@@ -1,0 +1,50 @@
+NODEID_STR (\d+/\w+/\w+)?
+NODE_TYPE \[\w\w\]
+IMAGE_DISK disk\d+:
+
+PACKAGE_NAME ((asr9k.*?-px)|(infra__.*?asr9k.*-px)){1}
+PACKAGE_VERSION ([a-zA-Z0-9.]*){1}
+PACKAGE disk0:%{PACKAGE_NAME}-%{PACKAGE_VERSION}
+
+COMP_P %{NL}%{PACKAGE:pkg1}%{NL}%{PACKAGE:pkg2}%{NL}%{PACKAGE:pkg3}
+COMP_PKG (%{PACKAGE}%{NL})+
+COMP_PKG_INFO (Info:%{SPACE}%{PACKAGE})+
+
+OPERATION_SUCCESS Install operation (\d+) completed successfully
+OPERATION_FAILURE \s+Install operation (\d+) failed
+OPERATION_ABORTED Install operation (\d+) aborted
+PIE_NOTFOUND Error:\s+not be found.
+PKG_SKIPPED_ERROR %{SPACE}Info:%{SPACE}(.*)\(skipped - not a pie\)
+EXISTING_PKG_SKIPPED (Skipped adding the following package as it was already present|Skipped adding the following packages as they were already)
+NO_INACTIVE_PKGS There are no inactive packages.*
+REQUEST_PATTERN no install requests in operation
+
+ADD_LOG Info:%{SPACE}(The following package is now available to be activated|The following packages are now available to be activated)
+ADD_OP_START_MSG Install operation \d+ \'\(admin\) install add
+REMOVE_OP_START_MSG Install operation \d+ \'\(admin\) install remove inactive
+REMOVE_LOG Info:%{SPACE}This operation will remove the following package:
+REQUEST_PATTERN no install requests in operation
+
+ACTIVATE_OP_START_MSG Install operation \d+ \'\(admin\) install activate
+ACTIVATE_LOG Info:%{SPACE}This operation will activate the following package
+COMMIT_OP_START_MSG Install operation \d+ \'\(admin\) install commit
+DEACTIVATE_OP_START_MSG Install operation \d+ \'\(admin\) install deactivate
+
+BOOT_DEVICE %{SPACE}Boot Device: (disk\d+:|[a-zA-Z]+:)
+ALLNODEID (0\/R[S]*P[01]\/CPU0|0\/\d+\/CPU0)
+
+ERROR_DATA %{NL} 
+ADD_ERROR Error:%{GREEDYDATA} 
+
+RSIPS_STR \d+\/\d+\/\d+\/\d+(\/\d+)?
+MGMT_PORT_STR MgmtEth\d\/RP[01]\/CPU0\/\d
+PORT_NAME_STR (HundredGigE|TenGigE)
+PORT_STR (%{PORT_NAME_STR}%{RSIPS_STR}|Loopback\d+|%{MGMT_PORT_STR})
+ROUTING_PORT_STR (%{PORT_NAME_STR}%{RSIPS_STR}|Loopback\d+)
+
+NETMASK (/\d\d)?
+ROUTE_TYPE ([LBCS]|S\*)
+ROUTE \d+\.\d+\.\d+\.\d+/\d+
+CEF_NH (%{IP}|receive|broadcast|attached)
+CEF_NH_WO_NETMASK IP|receive|broadcast|broadcast
+CEF_PORT_STR (%{PORT_STR}|<recursive>)

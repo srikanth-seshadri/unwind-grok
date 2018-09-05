@@ -1,4 +1,4 @@
-NODEID_STR (\d+/\w+/\w+)?
+NODEID_STR (?:\d+/\w+/\w+)
 NODE_TYPE \[\w\w\]
 IMAGE_DISK disk\d+:
 
